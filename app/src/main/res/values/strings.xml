@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">BottomNavBar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="profile_fragment">Profile fragment</string>
+    <string name="home_fragment">Home Fragment</string>
+    <string name="forum_fragment">Forum Fragment</string>
+    <string name="activity_fragment">Activity Fragment</string>
+    <string name="product_fragment">Product Fragment</string>
+    <string name="biblio_fragment">Bibliotheque Fragment</string>
+    <string name="open_camera">Open Camera</string>
+    <string name="attach_file">Attach File</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

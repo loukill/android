@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.bottomnavbar.view.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/forumFragment"
+        android:name="com.example.bottomnavbar.view.fragment.ForumFragment"
+        android:label="@string/forum_fragment"
+        tools:layout="@layout/fragment_forum" />
+    <fragment
+        android:id="@+id/activityFragment"
+        android:name="com.example.bottomnavbar.view.fragment.ActivityFragment"
+        android:label="activity_fragment"
+        tools:layout="@layout/fragment_activity" >
+        <action
+            android:id="@+id/action_activityFragment_to_simonGameActivity"
+            app:destination="@id/simonGameActivity" />
+        <action
+            android:id="@+id/action_activityFragment_to_cameraActivity"
+            app:destination="@id/cameraActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/simonGameActivity"
+        android:name="com.example.bottomnavbar.view.SimonGameActivity"
+        android:label="activity_simon_game"
+        tools:layout="@layout/activity_simon_game" />
+    <activity
+        android:id="@+id/cameraActivity"
+        android:name="com.example.bottomnavbar.view.CameraActivity"
+        android:label="activity_camera"
+        tools:layout="@layout/activity_camera" />
+
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.example.bottomnavbar.view.fragment.ProductFragment"
+        android:label="@string/product_fragment"
+        tools:layout="@layout/fragment_product" />
+    <fragment
+        android:id="@+id/biblioFragment"
+        android:name="com.example.bottomnavbar.view.fragment.BiblioFragment"
+        android:label="@string/biblio_fragment"
+        tools:layout="@layout/fragment_biblio"/>
+
+</navigation>
