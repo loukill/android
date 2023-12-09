@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_activityFragment_to_cameraActivity"
             app:destination="@id/cameraActivity" />
+        <action
+            android:id="@+id/action_activityFragment_to_displayTextActivity"
+            app:destination="@+id/displayTextActivity"/>
     </fragment>
     <activity
         android:id="@+id/simonGameActivity"

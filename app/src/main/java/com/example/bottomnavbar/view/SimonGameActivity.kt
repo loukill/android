@@ -16,9 +16,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bottomnavbar.R
+import com.example.bottomnavbar.model.Score
 import com.example.bottomnavbar.model.SimonGameModel
 import com.example.bottomnavbar.viewModel.SimonGameViewModel
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 
 class SimonGameActivity : AppCompatActivity() {
@@ -58,7 +60,7 @@ class SimonGameActivity : AppCompatActivity() {
         val animator = ObjectAnimator.ofFloat(button, "alpha", 0f, 1f).apply {
             duration = 1000
             repeatMode = ObjectAnimator.REVERSE
-            repeatCount = 1
+            repeatCount = 0
         }
 
         animator.addListener(object : AnimatorListenerAdapter() {
@@ -135,7 +137,7 @@ class SimonGameActivity : AppCompatActivity() {
             viewModel.incrementLevel()
             viewModel.generateNewSequence()
             userSequence.clear()
-            updateUI()
+           updateUI()
         }
 
     }
@@ -170,28 +172,34 @@ class SimonGameActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun saveScore(score: Int) {
-        val sharedPreferences =
-            getSharedPreferences("com.example.bottomnavbar", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-
-        // Mettre à jour la liste des scores
-        val scoresJson = sharedPreferences.getString("scores_list", "[]")
+    private fun saveScore(scoreValue: Int) {
+        val sharedPreferences = getSharedPreferences("com.example.bottomnavbar", Context.MODE_PRIVATE)
         val gson = Gson()
-        val scores = gson.fromJson(scoresJson, Array<Int>::class.java).toMutableList()
-        scores.add(score)
-        if (scores.size > 10) {
-            scores.removeAt(0)
-        }
-        editor.putString("scores_list", gson.toJson(scores))
 
-        // Mettre à jour le meilleur score
+        // Retrieve current scores and update them
+        val scoresJson = sharedPreferences.getString("scores_list", "[]")
+        Log.d("SimonGameActivity", "Retrieved scores JSON: $scoresJson")
+        val type = object : TypeToken<List<Score>>() {}.type
+        val currentScores: MutableList<Score> = gson.fromJson(scoresJson, type) ?: mutableListOf()
+
+        // Create a new Score object (add appropriate username and date)
+        val newScore = Score("username", scoreValue, System.currentTimeMillis())
+        currentScores.add(newScore)
+
+        // Truncate the list if it exceeds 10 items
+        if (currentScores.size > 10) {
+            currentScores.removeAt(0)
+        }
+
+        // Save the updated list of scores
+        sharedPreferences.edit().putString("scores_list", gson.toJson(currentScores)).apply()
+
+        // Update best score if the new score is higher
         val bestScore = sharedPreferences.getInt("best_score", 0)
-        if (score > bestScore) {
-            editor.putInt("best_score", score)
+        if (scoreValue > bestScore) {
+            sharedPreferences.edit().putInt("best_score", scoreValue).apply()
         }
-
-        editor.apply()
     }
+
 
 }

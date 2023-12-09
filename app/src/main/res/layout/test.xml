@@ -1,0 +1,57 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+
+        <!-- Top Button -->
+        <ImageView
+            android:id="@+id/buttonTop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/blue"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Right Button -->
+        <ImageView
+            android:id="@+id/buttonRight"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/yellow"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintTop_toTopOf="@id/buttonTop"
+        app:layout_constraintBottom_toBottomOf="@id/buttonTop"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Bottom Button -->
+        <ImageView
+            android:id="@+id/buttonBottom"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/red"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintStart_toStartOf="@id/buttonTop"
+        app:layout_constraintEnd_toEndOf="@id/buttonTop"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/buttonLeft"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/green"
+    app:layout_constraintWidth_percent="0.2"
+    app:layout_constraintHeight_percent="0.2"
+    app:layout_constraintTop_toTopOf="@id/buttonTop"
+    app:layout_constraintBottom_toBottomOf="@id/buttonTop"
+    app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

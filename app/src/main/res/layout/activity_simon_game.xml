@@ -4,67 +4,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/soft_blue"
     tools:context=".view.SimonGameActivity">
 
     <Button
         android:id="@+id/buttonRed"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@color/red"
+        android:background="@drawable/circle_shape_red"
+        android:onClick="onRedButtonClick"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
+        app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.665" />
 
     <Button
         android:id="@+id/buttonGreen"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@color/green"
+        android:background="@drawable/circle_shape_green"
+        android:onClick="onGreenButtonClick"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.665" />
 
     <Button
         android:id="@+id/buttonBlue"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@color/blue"
+        android:background="@drawable/circle_shape_blue"
+        android:onClick="onBlueButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
+        app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
+        app:layout_constraintVertical_bias="0.207" />
 
     <Button
         android:id="@+id/buttonYellow"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@color/yellow"
+        android:background="@drawable/circle_shape_yellow"
+        android:onClick="onYellowButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
+        app:layout_constraintVertical_bias="0.207" />
 
     <TextView
         android:id="@+id/levelTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Niveau: 1"
-        android:textSize="18sp"
-        android:layout_margin="16dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 
     <Button
         android:id="@+id/buttonStart"
-        android:layout_width="189dp"
+        android:layout_width="0dp"
         android:layout_height="51dp"
         android:layout_marginTop="272dp"
-        android:background="@color/parme"
+        android:background="@color/soft_red"
         android:text="Commencer le jeu"
-
+        android:textStyle="bold"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

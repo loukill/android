@@ -7,4 +7,6 @@
     <color name="blue">#0000FF</color>
     <color name="yellow">#FFFF00</color>
     <color name="parme">#cfa0e9</color>
+    <color name="soft_blue">#b3e5fc</color>
+    <color name="soft_red">#FFCDD2</color>
 </resources>

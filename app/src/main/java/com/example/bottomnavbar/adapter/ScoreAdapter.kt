@@ -6,13 +6,27 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomnavbar.R
+import com.example.bottomnavbar.model.Score
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
-class ScoreAdapter(private val scores: List<Int>) : RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
+
+
+
+class ScoreAdapter(private val scores: List<Score>) : RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder>() {
     class ScoreViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val scoreTextView: TextView = view.findViewById(R.id.scoreTextView)
+        val scoreTextView: TextView = view.findViewById(R.id.itemScoreTextView)
+        val dateTextView: TextView = view.findViewById(R.id.itemDateTextView)
 
-        fun bind(score: Int) {
-            scoreTextView.text = score.toString()
+        fun bind(score: Score) {
+            scoreTextView.text = score.score.toString()
+            dateTextView.text = formatDate(score.date)
+        }
+
+        private fun formatDate(timestamp: Long): String {
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            return sdf.format(Date(timestamp))
         }
     }
 
@@ -22,7 +36,8 @@ class ScoreAdapter(private val scores: List<Int>) : RecyclerView.Adapter<ScoreAd
     }
 
     override fun onBindViewHolder(holder: ScoreViewHolder, position: Int) {
-        holder.bind(scores[position])
+        val score = scores[position]
+        holder.bind(score)
     }
 
     override fun getItemCount() = scores.size
