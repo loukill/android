@@ -22,8 +22,9 @@ class DisplayTextActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_text)
 
+        supportActionBar?.hide()
 
-            fetchTextCategories()
+        fetchTextCategories()
 
     }
 

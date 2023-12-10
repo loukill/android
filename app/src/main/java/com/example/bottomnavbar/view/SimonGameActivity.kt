@@ -16,11 +16,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bottomnavbar.R
+import com.example.bottomnavbar.api.RetrofitClient
 import com.example.bottomnavbar.model.Score
 import com.example.bottomnavbar.model.SimonGameModel
 import com.example.bottomnavbar.viewModel.SimonGameViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class SimonGameActivity : AppCompatActivity() {
@@ -32,6 +37,8 @@ class SimonGameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_simon_game)
+
+        supportActionBar?.hide()
 
         val categoryId = intent.extras?.getString("categoryId")
 
@@ -143,7 +150,9 @@ class SimonGameActivity : AppCompatActivity() {
     }
 
     private fun resetGame() {
-        saveScore(viewModel.currentLevel - 1)  // Sauvegarder le score
+        val scoreValue = viewModel.currentLevel - 1
+        saveScore(scoreValue)  // Sauvegarder le score dans SharedPreferences
+        sendScoreToBackend(scoreValue)// Sauvegarder le score
         showGameOverDialog()  // Afficher la boîte de dialogue Game Over
 
         findViewById<Button>(R.id.buttonStart).isEnabled = true
@@ -152,6 +161,30 @@ class SimonGameActivity : AppCompatActivity() {
         userSequence.clear()
         updateUI()
         mediaPlayer?.pause()
+    }
+
+    private fun sendScoreToBackend(scoreValue: Int) {
+        val newScore = Score("username", scoreValue, System.currentTimeMillis()) // Remplacez "username" par l'identifiant de l'utilisateur réel si nécessaire
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.instance.postScore(newScore)
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        Log.d("SimonGameActivity", "Score sent successfully: ${response.body()}")
+                        Toast.makeText(this@SimonGameActivity, "Score enregistré avec succès", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val errorResponse = response.errorBody()?.string() ?: "Unknown error"
+                        Log.e("SimonGameActivity", "Error sending score: $errorResponse")
+                        Toast.makeText(this@SimonGameActivity, "Erreur lors de l'envoi du score", Toast.LENGTH_LONG).show()
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("SimonGameActivity", "Exception lors de l'envoi du score", e)
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@SimonGameActivity, "Exception lors de l'envoi du score: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     private fun showScores() {

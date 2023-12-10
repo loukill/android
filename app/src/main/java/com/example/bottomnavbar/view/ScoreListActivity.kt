@@ -23,6 +23,8 @@ class ScoreListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_score_list)
 
+        supportActionBar?.hide()
+
         sharedPreferences = getSharedPreferences("com.example.bottomnavbar", Context.MODE_PRIVATE)
 
         try {

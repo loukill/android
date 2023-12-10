@@ -10,14 +10,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="18sp"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:gravity="start" />
 
     <TextView
         android:id="@+id/itemDateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="23sp"
+        android:textStyle="bold"
         android:gravity="end"
         android:layout_marginStart="16dp" />
 </LinearLayout>

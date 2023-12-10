@@ -3,14 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/soft_blue"
+    android:padding="24dp">
 
     <TextView
         android:id="@+id/bestScoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Meilleur score : 0"
-        android:textSize="18sp"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/parme"
+        android:drawableStart="@drawable/rewarded_ads_24px"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"/>
 
