@@ -20,8 +20,29 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BottomNavBar"
+        android:theme="@style/Theme.Dyslire"
         tools:targetApi="31">
+        <activity
+            android:name=".view.SinglePlayerInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.SinglePlayerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.ScoreTableActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.PlayerVsComputerInfo"
+            android:exported="false" />
+        <activity
+            android:name=".view.PlayerVsComputerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.PlayerNameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.TicTacActivity"
+            android:exported="false" />
         <activity
             android:name=".view.DisplayTextActivity"
             android:exported="false" />

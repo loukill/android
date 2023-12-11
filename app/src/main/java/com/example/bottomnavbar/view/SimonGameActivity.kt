@@ -36,6 +36,7 @@ class SimonGameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_Dyslire)
         setContentView(R.layout.activity_simon_game)
 
         supportActionBar?.hide()

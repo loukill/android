@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BottomNavBar</string>
+    <string name="app_name">Dyslire</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="profile_fragment">Profile fragment</string>
     <string name="home_fragment">Home Fragment</string>
@@ -7,6 +7,8 @@
     <string name="activity_fragment">Activity Fragment</string>
     <string name="product_fragment">Product Fragment</string>
     <string name="biblio_fragment">Bibliotheque Fragment</string>
+    <string name="data_file">DataFile</string>
+    <string name="score_file">HighestScore</string>
     <string name="open_camera">Open Camera</string>
     <string name="attach_file">Attach File</string>
     <!-- TODO: Remove or change this placeholder text -->

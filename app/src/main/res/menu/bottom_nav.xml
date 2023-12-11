@@ -21,6 +21,4 @@
         android:title="Bibliotheque"
         android:icon="@drawable/baseline_menu_book_24" />
 
-
-
 </menu>

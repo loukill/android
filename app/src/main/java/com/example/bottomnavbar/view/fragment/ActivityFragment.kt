@@ -18,6 +18,7 @@ import com.example.bottomnavbar.model.Category
 import com.example.bottomnavbar.view.CameraActivity
 import com.example.bottomnavbar.view.DisplayTextActivity
 import com.example.bottomnavbar.view.SimonGameActivity
+import com.example.bottomnavbar.view.TicTacActivity
 import kotlinx.coroutines.launch
 
 
@@ -52,6 +53,9 @@ class ActivityFragment : Fragment() {
                 }
                 "exercices" -> {
                     navigateToDispalyTextActivity()
+                }
+                "Tic Tac Toe" -> {
+                    navigateToTicTacActivity()
                 }
                 // Ajoutez d'autres cas au besoin
                 else -> {
@@ -92,6 +96,11 @@ class ActivityFragment : Fragment() {
 
     private fun navigateToDispalyTextActivity() {
         val intent = Intent(requireContext(), DisplayTextActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateToTicTacActivity() {
+        val intent = Intent(requireContext(), TicTacActivity::class.java)
         startActivity(intent)
     }
 

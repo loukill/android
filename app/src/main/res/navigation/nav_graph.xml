@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_activityFragment_to_displayTextActivity"
             app:destination="@+id/displayTextActivity"/>
+        <action
+            android:id="@+id/action_activityFragment_to_ticTacActivity"
+            app:destination="@+id/ticTacActivity"/>
     </fragment>
     <activity
         android:id="@+id/simonGameActivity"
