@@ -56,15 +56,15 @@
         android:id="@+id/btnPlay"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:text="Let's Play"
-        android:textSize="25sp"
-        android:textColor="@color/blue"
-        android:textAllCaps="false"
-        android:drawableLeft="@drawable/ic_play_blue"
         android:layout_below="@id/etPlayer2Name"
-        android:layout_marginTop="62dp"
         android:layout_centerInParent="true"
-        android:backgroundTint="@color/white"/>
+        android:layout_marginTop="62dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_play_blue"
+        android:text="Let's Play"
+        android:textAllCaps="false"
+        android:textColor="@color/blue_light"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/btnHome"

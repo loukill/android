@@ -15,7 +15,6 @@ import com.example.bottomnavbar.R
 import com.example.bottomnavbar.adapter.CategoryAdapter
 import com.example.bottomnavbar.api.RetrofitClient
 import com.example.bottomnavbar.model.Category
-import com.example.bottomnavbar.view.CameraActivity
 import com.example.bottomnavbar.view.DisplayTextActivity
 import com.example.bottomnavbar.view.SimonGameActivity
 import com.example.bottomnavbar.view.TicTacActivity
@@ -46,14 +45,12 @@ class ActivityFragment : Fragment() {
         categoryAdapter = CategoryAdapter(categoryList) { category ->
             when (category.title) {
                 "Cours" -> {
-                    navigateToCameraActivity()
+                    navigateToDispalyTextActivity()
                 }
                 "Simon dit" -> {
                     navigateToSimonGameActivity()
                 }
-                "exercices" -> {
-                    navigateToDispalyTextActivity()
-                }
+
                 "Tic Tac Toe" -> {
                     navigateToTicTacActivity()
                 }
@@ -82,11 +79,6 @@ class ActivityFragment : Fragment() {
                 // Log the error or show an error message
             }
         }
-    }
-
-    private fun navigateToCameraActivity() {
-        val intent = Intent(requireContext(), CameraActivity::class.java)
-        startActivity(intent)
     }
 
     private fun navigateToSimonGameActivity() {

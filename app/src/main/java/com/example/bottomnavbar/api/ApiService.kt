@@ -1,5 +1,6 @@
 package com.example.bottomnavbar.api
 
+import com.example.bottomnavbar.model.AudioResponse
 import com.example.bottomnavbar.model.Category
 import com.example.bottomnavbar.model.Score
 import com.example.bottomnavbar.model.Text
@@ -17,6 +18,9 @@ interface ApiService {
 
     @GET("/txtCategory")
     suspend fun getTextCategories(): Response<List<TextCategory>>
+
+    @GET("/text/synthese/parCategorie/{categoryId}")
+    suspend fun getAudioUrlByCategoryId(@Path("categoryId") categoryId: String): Response<AudioResponse>
 
     @GET("/text/byCategory/{categoryId}")
     suspend fun getTextByCategoryId(@Path("categoryId") categoryId: String): Response<Text>

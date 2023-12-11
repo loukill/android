@@ -10,6 +10,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -30,6 +32,7 @@ import kotlinx.coroutines.withContext
 
 class SimonGameActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
+    private lateinit var menu: Menu
     private val viewModel = SimonGameViewModel(SimonGameModel())
     private val userSequence = mutableListOf<String>()
     private val sequenceHandler = Handler(Looper.getMainLooper())
@@ -39,7 +42,8 @@ class SimonGameActivity : AppCompatActivity() {
         setTheme(R.style.Theme_Dyslire)
         setContentView(R.layout.activity_simon_game)
 
-        supportActionBar?.hide()
+        title = "Simon Game"
+
 
         val categoryId = intent.extras?.getString("categoryId")
 
@@ -99,10 +103,70 @@ class SimonGameActivity : AppCompatActivity() {
         showSequence(viewModel.currentSequence)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.music_menu, menu)
+        this.menu = menu // Store the Menu object
+        updateMenuItems() // Update the visibility of menu items based on music playing status
+        return true
+    }
+
+    private fun updateMenuItems() {
+        // Here we check if music is playing and update menu items
+        val isMusicPlaying = checkIfMusicIsPlaying()
+        menu.findItem(R.id.musicOn)?.isVisible = !isMusicPlaying
+        menu.findItem(R.id.musicOff)?.isVisible = isMusicPlaying
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.musicOn -> {
+                playMusic()
+                updateMenuItems() // Call this method to update the menu items
+                return true
+            }
+            R.id.musicOff -> {
+                pauseMusic()
+                updateMenuItems() // Call this method to update the menu items
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun playMusic() {
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.game_music)
+            mediaPlayer?.isLooping = true // Set looping if you want the music to loop
+        }
+        mediaPlayer?.start()
+        updateMenuItems() // Update menu items after playing music
+    }
+
+    private fun pauseMusic() {
+        mediaPlayer?.pause()
+        updateMenuItems() // Update menu items after pausing music
+    }
+
+    private fun checkIfMusicIsPlaying(): Boolean {
+        return mediaPlayer?.isPlaying ?: false
+    }
+
+    override fun onStop() {
+        super.onStop()
+        pauseMusic() // Pause music when the activity is no longer visible
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
+
+
 
     private fun startGame() {
         Log.d("SimonGameActivity", "startGame: Le jeu commence.")
-
+/*
         mediaPlayer = MediaPlayer.create(this, R.raw.game_music).apply {
             setOnPreparedListener {
                 Log.d("MediaPlayer", "Prêt à jouer")
@@ -114,7 +178,7 @@ class SimonGameActivity : AppCompatActivity() {
                 true
             }
         }
-
+*/
         findViewById<Button>(R.id.buttonStart).isEnabled = false
         userSequence.clear()
         viewModel.generateNewSequence() // Générer la première séquence ici
@@ -122,7 +186,7 @@ class SimonGameActivity : AppCompatActivity() {
 
     }
 
-
+/*
     override fun onStop() {
         super.onStop()
         sequenceHandler.removeCallbacksAndMessages(null)
@@ -130,7 +194,7 @@ class SimonGameActivity : AppCompatActivity() {
         mediaPlayer?.release()
         mediaPlayer = null
     }
-
+*/
 
     private fun onColorButtonClicked(color: String) {
         Log.d("SimonGameActivity", "onColorButtonClicked: Bouton $color appuyé.")
@@ -161,7 +225,7 @@ class SimonGameActivity : AppCompatActivity() {
         viewModel.generateNewSequence()
         userSequence.clear()
         updateUI()
-        mediaPlayer?.pause()
+        //mediaPlayer?.pause()
     }
 
     private fun sendScoreToBackend(scoreValue: Int) {

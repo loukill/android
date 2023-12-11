@@ -47,9 +47,6 @@
             android:name=".view.DisplayTextActivity"
             android:exported="false" />
         <activity
-            android:name=".view.CameraActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.ScoreListActivity"
             android:exported="false" />
         <activity android:name=".view.SimonGameActivity" />

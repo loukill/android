@@ -1,10 +1,12 @@
 package com.example.bottomnavbar.view
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -18,14 +20,51 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DisplayTextActivity : AppCompatActivity() {
+
+    private var selectedCategoryId: String? = null
+    private var mediaPlayer: MediaPlayer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_text)
 
-        supportActionBar?.hide()
-
         fetchTextCategories()
 
+        val readButton: Button = findViewById(R.id.btnRead)
+        readButton.setOnClickListener {
+            selectedCategoryId?.let { categoryId ->
+                playTextAudio(categoryId)
+            }
+        }
+
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
+
+
+    private fun playTextAudio(categoryId: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.instance.getAudioUrlByCategoryId(categoryId)
+                if (response.isSuccessful && response.body() != null) {
+                    val audioUrl = response.body()!!.audioUrl
+                    withContext(Dispatchers.Main) {
+                        mediaPlayer?.stop()
+                        mediaPlayer = MediaPlayer().apply {
+                            setDataSource(audioUrl)
+                            prepare()
+                            start()
+                        }
+                    }
+                } else {
+                    Log.e("DisplayTextActivity", "Error fetching audio: ${response.errorBody()?.string()}")
+                }
+            } catch (e: Exception) {
+                Log.e("DisplayTextActivity", "Exception in fetching audio", e)
+            }
+        }
     }
 
     private fun fetchTextCategories() {
@@ -48,13 +87,14 @@ class DisplayTextActivity : AppCompatActivity() {
 
     private fun setupSpinner(categories: List<TextCategory>) {
         val spinner: Spinner = findViewById(R.id.spinnerTextCategory)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories.map { it.title })
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val adapter = ArrayAdapter(this, R.layout.spinner_item, categories.map { it.title })
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
         spinner.adapter = adapter
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 val selectedCategory = categories[position]
+                selectedCategoryId = selectedCategory.id
                 fetchTextByCategory(selectedCategory.id)
             }
 
