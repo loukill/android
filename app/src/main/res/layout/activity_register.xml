@@ -184,6 +184,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="@string/btn_terms_and_privacy"
+        android:textSize="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"

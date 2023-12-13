@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                                 Log.d("LoginActivity", "Login successful. User data: $userObject")
                                 Log.d("bbbbbbbbb", userObject.toString())
 
-                                val intent = Intent(this@LoginActivity, ProfilActivity::class.java)
+                                val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                 intent.putExtra("userId", userObject._id)
                                 intent.putExtra("userName", userObject.name)
                                 intent.putExtra("userEmail", userObject.email)
@@ -88,7 +88,7 @@ class LoginActivity : AppCompatActivity() {
                                 Snackbar.LENGTH_SHORT
                             ).show()
                         }
-                        navigateToMainActivity()
+
                     } else {
                         // Handle the case where the response is not successful
                         val errorBody = response.errorBody()?.string().toString()
@@ -128,11 +128,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun navigateToMainActivity() {
-        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
+
 
     private fun validateEmail(): Boolean {
         val email = binding.edtEmail.text.toString().trim()
