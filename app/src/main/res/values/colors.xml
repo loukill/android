@@ -20,4 +20,23 @@
     <color name="blue_light">#2196F3</color>
     <color name="selected_color">#2196F3</color> <!-- Example color -->
     <color name="unselected_color">#8F8F8F</color>
+
+    <color name="colorPrimary">#6C2378</color>
+    <color name="Primary">#9C27B0</color>
+    <color name="Secondary">#9C27B0</color>
+    <color name="colorSecondary">#9C27B0</color>
+
+    <color name="colorSecondaryDark">#333744</color>
+    <color name="colorSecondaryLight">#111d40</color>
+
+    <color name="startblue">#E8E82C</color>
+    <color name="endblue">#EDED93</color>
+    <color name="graylight">#5B9C11</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+
 </resources>

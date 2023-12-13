@@ -19,17 +19,17 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_activityFragment_to_cameraActivity">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="action_activityFragment_to_displayTextActivity">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                             <entry key="action_activityFragment_to_simonGameActivity">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_activityFragment_to_ticTacActivity">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -51,18 +51,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="cameraActivity">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="256" />
-                            <option name="y" value="724" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="forumFragment">
                     <value>
                       <LayoutPositions>
@@ -76,6 +64,39 @@
                     </value>
                   </entry>
                   <entry key="homeFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="loginFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_loginFragment_to_mainActivity">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="mainActivity">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">

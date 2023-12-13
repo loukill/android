@@ -23,6 +23,37 @@
         android:theme="@style/Theme.Dyslire"
         tools:targetApi="31">
         <activity
+            android:name=".splashScreen.splashscreenActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.VerifyOTP"
+            android:exported="false" />
+        <activity
+            android:name=".view.ResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.RegisterdoctorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.Register"
+            android:exported="false" />
+        <activity
+            android:name=".view.ProfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="false" />
+        <activity
+            android:name=".view.ForgetpasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.SinglePlayerInfoActivity"
             android:exported="false" />
         <activity
@@ -52,12 +83,7 @@
         <activity android:name=".view.SimonGameActivity" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
         </activity>
     </application>
 

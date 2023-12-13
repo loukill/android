@@ -3,7 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/loginFragment">
+
+    <activity
+        android:id="@+id/loginFragment"
+        android:name="com.example.bottomnavbar.view.LoginActivity"
+        android:label="fragment_login"
+        tools:layout="@layout/activity_login" >
+    <action
+        android:id="@+id/action_loginFragment_to_mainActivity"
+        app:destination="@id/mainActivity" />
+    </activity>
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.bottomnavbar.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 
     <fragment
         android:id="@+id/homeFragment"
@@ -35,11 +51,6 @@
         android:name="com.example.bottomnavbar.view.SimonGameActivity"
         android:label="activity_simon_game"
         tools:layout="@layout/activity_simon_game" />
-    <activity
-        android:id="@+id/cameraActivity"
-        android:name="com.example.bottomnavbar.view.CameraActivity"
-        android:label="activity_camera"
-        tools:layout="@layout/activity_camera" />
 
     <fragment
         android:id="@+id/productFragment"
