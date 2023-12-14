@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Bouton d'édition -->
+        <ImageButton
+            android:id="@+id/editForumButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_pencil"
+            app:tint="@color/blue" />
+
+        <!-- Titre du forum -->
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="Forum Title"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <!-- Image du forum -->
+        <ImageView
+            android:id="@+id/forumImageView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/photo_forum"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Description du forum -->
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Forum Description"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/darker_gray" />
+
+        <!-- Afficher la note -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <!-- Utilisation de MaterialRatingBar pour une notation moderne -->
+
+            <!-- Nombre de likes et dislikes avec icônes -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/btn_star_big_on"
+                    app:tint="@android:color/holo_green_dark" />
+
+                <TextView
+                    android:id="@+id/likesTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@android:color/holo_green_dark" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/btn_star_big_off"
+                    app:tint="@android:color/holo_red_dark" />
+
+                <TextView
+                    android:id="@+id/dislikesTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="4dp"
+                    android:text="0"
+                    android:textColor="@android:color/holo_red_dark" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Ajouter la fonctionnalité de notation avec MaterialButtons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/likeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/purple"
+                android:padding="8dp"
+                app:icon="@drawable/round_thumb_up_alt_24"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white"
+                app:iconSize="24dp"
+                app:strokeColor="@color/blue"
+                app:strokeWidth="2dp"
+                android:text="Like"
+                android:textColor="@color/white"/>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dislikeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/gray"
+                android:padding="8dp"
+                app:icon="@drawable/baseline_thumb_down_alt_24"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white"
+                app:iconSize="24dp"
+                app:strokeWidth="2dp"
+                android:text="DISLIKE"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

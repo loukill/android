@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+    <!-- ... le reste de votre mise en page ... -->
+
+
+
+    <!-- Cadre visible -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <View
+            android:layout_width="370dp"
+            android:layout_height="282dp"
+            android:background="@drawable/rounded_border" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="604dp"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:text="Modifier un Forum"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/titleEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="Titre"
+                    android:inputType="textCapSentences" />
+
+                <EditText
+                    android:id="@+id/descriptionEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="Description"
+                    android:inputType="textMultiLine" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/chooseImageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Choisir une image"
+                    app:icon="@drawable/baseline_insert_photo_24"
+                    android:backgroundTint="@color/purple"
+                    app:iconGravity="textStart"
+                    app:cornerRadius="8dp"
+                    app:strokeWidth="2dp"
+                    android:onClick="onChooseImageClick"/>
+
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/updateForumButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Soumettre le Forum"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    app:cornerRadius="20dp"
+                    app:strokeWidth="2dp"
+                    />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
+
+</RelativeLayout>
