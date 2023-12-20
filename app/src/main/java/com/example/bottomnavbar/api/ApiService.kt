@@ -16,16 +16,19 @@ interface ApiService {
     @GET("/category") // Adjust the endpoint as per your backend API
     suspend fun getCategories(): Response<List<Category>>
 
-    @GET("/txtCategory")
-    suspend fun getTextCategories(): Response<List<TextCategory>>
+    @GET("/text")
+    suspend fun getAllText(): Response<List<Text>>
 
-    @GET("/text/synthese/parCategorie/{categoryId}")
-    suspend fun getAudioUrlByCategoryId(@Path("categoryId") categoryId: String): Response<AudioResponse>
+    @GET("/text/synthese/parTexte/{textId}")
+    suspend fun getAudioUrlByTextId(@Path("textId") textId: String): Response<AudioResponse>
 
-    @GET("/text/byCategory/{categoryId}")
-    suspend fun getTextByCategoryId(@Path("categoryId") categoryId: String): Response<Text>
+    @GET("/text/{textId}")
+    suspend fun getTextById(@Path("textId") textId: String): Response<Text>
 
     @POST("/score")
     suspend fun postScore(@Body score: Score): Response<ResponseBody>
+    @POST("/text/{textId}/consulter")
+    suspend fun enregistrerConsultation(@Path("textId") textId: String): Response<ResponseBody>
+
 
 }

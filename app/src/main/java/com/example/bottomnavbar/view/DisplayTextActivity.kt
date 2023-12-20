@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bottomnavbar.R
 import com.example.bottomnavbar.api.RetrofitClient
+import com.example.bottomnavbar.model.Text
 import com.example.bottomnavbar.model.TextCategory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,18 +22,18 @@ import kotlinx.coroutines.withContext
 
 class DisplayTextActivity : AppCompatActivity() {
 
-    private var selectedCategoryId: String? = null
+    private var selectedTextId: String? = null
     private var mediaPlayer: MediaPlayer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_text)
 
-        fetchTextCategories()
+        fetchTexts()
 
         val readButton: Button = findViewById(R.id.btnRead)
         readButton.setOnClickListener {
-            selectedCategoryId?.let { categoryId ->
-                playTextAudio(categoryId)
+            selectedTextId?.let { textId ->
+                playTextAudio(textId)
             }
         }
 
@@ -44,19 +45,24 @@ class DisplayTextActivity : AppCompatActivity() {
     }
 
 
-    private fun playTextAudio(categoryId: String) {
+    private fun playTextAudio(textId: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = RetrofitClient.instance.getAudioUrlByCategoryId(categoryId)
+                val response = RetrofitClient.instance.getAudioUrlByTextId(textId)
                 if (response.isSuccessful && response.body() != null) {
-                    val audioUrl = response.body()!!.audioUrl
-                    withContext(Dispatchers.Main) {
-                        mediaPlayer?.stop()
-                        mediaPlayer = MediaPlayer().apply {
-                            setDataSource(audioUrl)
-                            prepare()
-                            start()
+                    val audioUrls = response.body()!!.audioUrls
+                    if (audioUrls.isNotEmpty()) {
+                        val audioUrl = audioUrls[0] // Jouer le premier fichier audio
+                        withContext(Dispatchers.Main) {
+                            mediaPlayer?.stop()
+                            mediaPlayer = MediaPlayer().apply {
+                                setDataSource(audioUrl)
+                                prepare()
+                                start()
+                            }
                         }
+                    } else {
+                        Log.e("DisplayTextActivity", "No audio URLs received for text ID: $textId")
                     }
                 } else {
                     Log.e("DisplayTextActivity", "Error fetching audio: ${response.errorBody()?.string()}")
@@ -67,61 +73,51 @@ class DisplayTextActivity : AppCompatActivity() {
         }
     }
 
-    private fun fetchTextCategories() {
-        Log.d("DisplayTextActivity", "Fetching text categories")
+
+
+    private fun fetchTexts() {
+        Log.d("DisplayTextActivity", "Fetching texts")
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = RetrofitClient.instance.getTextCategories()
+                val response = RetrofitClient.instance.getAllText()
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && response.body() != null) {
                         setupSpinner(response.body()!!)
-                    }else {
-                        Log.e("DisplayTextActivity", "Error fetching categories: ${response.errorBody()?.string()}")
+                    } else {
+                        Log.e("DisplayTextActivity", "Error fetching texts: ${response.errorBody()?.string()}")
                     }
                 }
             } catch (e: Exception) {
-                Log.e("DisplayTextActivity", "Exception in fetching categories", e)
+                Log.e("DisplayTextActivity", "Exception in fetching texts", e)
             }
         }
     }
 
-    private fun setupSpinner(categories: List<TextCategory>) {
+    private fun setupSpinner(texts: List<Text>) {
         val spinner: Spinner = findViewById(R.id.spinnerTextCategory)
-        val adapter = ArrayAdapter(this, R.layout.spinner_item, categories.map { it.title })
+        val adapter = ArrayAdapter(this, R.layout.spinner_item, texts.map { it.title })
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
         spinner.adapter = adapter
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                val selectedCategory = categories[position]
-                selectedCategoryId = selectedCategory.id
-                fetchTextByCategory(selectedCategory.id)
+                val selectedText = texts[position]
+                selectedTextId = selectedText._id
+                fetchTextByCategory(selectedText._id)// Assurez-vous que 'id' est le bon champ
+                // Vous pouvez appeler ici la méthode pour afficher le texte sélectionné
+                consulterTexte(selectedText._id)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Optional: Handle the case where no category is selected
+                // Gestion du cas où aucun texte n'est sélectionné
             }
         }
     }
 
-
-    private fun showCategoryDialog(categories: List<TextCategory>) {
-        Log.d("DisplayTextActivity", "Showing categories in dialog: ${categories.map { it.title }}")
-        val categoryTitles = categories.map { it.title }.toTypedArray()
-        AlertDialog.Builder(this)
-            .setTitle("Choose Category")
-            .setItems(categoryTitles) { _, which ->
-                val selectedCategory = categories[which]
-                Log.d("DisplayTextActivity", "Category selected: ${selectedCategory.title}")
-                fetchTextByCategory(selectedCategory.id)
-            }
-            .show()
-    }
-
-    private fun fetchTextByCategory(categoryId: String) {
+    private fun fetchTextByCategory(textId: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = RetrofitClient.instance.getTextByCategoryId(categoryId)
+                val response = RetrofitClient.instance.getTextById(textId)
                 withContext(Dispatchers.Main) {
                     if (response.isSuccessful && response.body() != null) {
                         val text = response.body()!!
@@ -138,7 +134,21 @@ class DisplayTextActivity : AppCompatActivity() {
         }
     }
 
-
+    private fun consulterTexte(textId: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.instance.enregistrerConsultation(textId)
+                Log.d("DisplayTextActivity", "Envoi de l'ID pour consultation: $textId")
+                if (response.isSuccessful) {
+                    Log.d("DisplayTextActivity", "Consultation enregistrée avec succès pour le texte ID: $textId")
+                } else {
+                    Log.e("DisplayTextActivity", "Erreur lors de l'enregistrement de la consultation: ${response.errorBody()?.string()}")
+                }
+            } catch (e: Exception) {
+                Log.e("DisplayTextActivity", "Exception lors de l'enregistrement de la consultation", e)
+            }
+        }
+    }
 
 }
 
