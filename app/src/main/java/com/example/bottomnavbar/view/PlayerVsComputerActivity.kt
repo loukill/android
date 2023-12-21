@@ -4,15 +4,23 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.bottomnavbar.R
+import com.example.bottomnavbar.api.ApiService
+import com.example.bottomnavbar.model.ScoreTicTac
 import com.example.bottomnavbar.utility.Colors
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class PlayerVsComputerActivity : AppCompatActivity() {
     lateinit var b1: Button
@@ -44,6 +52,8 @@ class PlayerVsComputerActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var sharedPreferencesHS: SharedPreferences
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player_vs_computer)
@@ -73,6 +83,8 @@ class PlayerVsComputerActivity : AppCompatActivity() {
         var isDataAvail = sharedPreferences.getBoolean("dataAvail", false)
         var defaultColor = sharedPreferences.getInt("levelColor", color)
 
+
+
         var isSameLevel = false
 
         if(isDataAvail){
@@ -82,6 +94,7 @@ class PlayerVsComputerActivity : AppCompatActivity() {
             txtScore.append(scoreData)
             if (scoreData != null) {
                 score = scoreData.toInt()
+
             }
             if (levelData != null) {
                 level = levelData.toInt()
@@ -129,6 +142,8 @@ class PlayerVsComputerActivity : AppCompatActivity() {
 
                             var l = level-1
                             reset()
+
+
 
                             sharedPreferences.edit().putString("scoreData", score.toString()).apply()
                             sharedPreferences.edit().putString("levelData", level.toString()).apply()
@@ -201,6 +216,9 @@ class PlayerVsComputerActivity : AppCompatActivity() {
                             Handler().postDelayed(Runnable {
                                 score-=10
                                 reset()
+
+
+
                                 sharedPreferences.edit().putString("scoreData", score.toString()).apply()
                                 sharedPreferences.edit().putString("levelData", level.toString()).apply()
                                 sharedPreferences.edit().putBoolean("dataAvail", true).apply()
@@ -233,6 +251,8 @@ class PlayerVsComputerActivity : AppCompatActivity() {
                                 var l = level-1
 
                                 reset()
+
+
 
                                 sharedPreferences.edit().putString("scoreData", score.toString()).apply()
                                 sharedPreferences.edit().putString("levelData", level.toString()).apply()
@@ -400,17 +420,28 @@ class PlayerVsComputerActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        AlertDialog.Builder(this).setMessage("Leave game?").setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
-            sharedPreferences.edit().clear().apply()
-            super.onBackPressed()
-        }).setNegativeButton("No", DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() }).setCancelable(false).show()
+        Log.d("GameActivity", "Option item selected")
+        AlertDialog.Builder(this)
+            .setMessage("Leave game?")
+            .setPositiveButton("Yes") { dialog, which ->
+            }
+            .setNegativeButton("No") { dialog, which -> dialog.dismiss() }
+            .setCancelable(false)
+            .show()
         return true
     }
-    override fun onBackPressed() {
-        AlertDialog.Builder(this).setMessage("Leave game?").setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
-            sharedPreferences.edit().clear().apply()
-            super.onBackPressed()
-        }).setNegativeButton("No", DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() }).setCancelable(false).show()
 
+    override fun onBackPressed() {
+        Log.d("GameActivity", "Back pressed")
+
+        AlertDialog.Builder(this)
+            .setMessage("Leave game?")
+            .setPositiveButton("Yes") { dialog, which ->
+            }
+            .setNegativeButton("No") { dialog, which -> dialog.dismiss() }
+            .setCancelable(false)
+            .show()
+        super.onBackPressed()
     }
+
 }

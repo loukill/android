@@ -79,7 +79,7 @@
         android:backgroundTint="@color/white"
         android:drawableLeft="@drawable/ic_baseline_home_24"
         android:text="Home"
-        android:textColor="@color/blue"
+        android:textColor="@color/blue_light"
         android:textSize="21sp" />
 
 </RelativeLayout>
